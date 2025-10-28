@@ -43,10 +43,10 @@ export function Header() {
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className={clsx(
-        "fixed top-0 inset-x-0 z-50 transition-colors duration-300",
+        "fixed top-0 inset-x-0 z-50 transition-all duration-300",
         scrolled
-          ? "bg-background/80 backdrop-blur-lg border-b border-white/10"
-          : "bg-transparent"
+          ? "bg-background/80 py-0.5 backdrop-blur-lg border-b border-white/10"
+          : "bg-transparent py-4"
       )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -115,7 +115,7 @@ export function Header() {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link
                 href="/"
-                className="relative inline-flex items-center justify-center rounded-lg text-sm font-medium text-white h-9 px-5 py-2 group overflow-hidden"
+                className="relative inline-flex items-center justify-center rounded-xl text-sm font-medium text-white h-9 px-5 py-2 group overflow-hidden"
               >
                 <motion.div
                   animate={{ backgroundPosition: ["0% 50%", "150% 50%"] }}

@@ -11,6 +11,8 @@ import {
   FilePlus2,
   FlaskConical,
   Library,
+  MessageSquareMoreIcon,
+  PointerIcon,
   Search,
   Sparkles,
   Zap,
@@ -167,6 +169,8 @@ const TiltCard = ({
         rotateY,
         transformStyle: "preserve-3d",
       }}
+      whileHover={{ scale: 1.05, z: 50 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className={clsx(
         "relative rounded-xl border hover:z-50 border-white/10 bg-white/5 shadow-2xl shadow-indigo-500/20 transition-transform duration-500 ease-out",
         className
@@ -219,7 +223,7 @@ const HeroImageCarousel = () => {
   return (
     <div className="relative mt-16 sm:mt-40 max-w-5xl h-48 mx-auto px-4 sm:px-0">
       {/* Bottom Fade */}
-      <div className="absolute z-30 inset-x-0 -bottom-1/2 w-screen h-1/2 bg-gradient-to-t from-background to-transparent" />
+      <div className="absolute z-30 inset-x-0 -bottom-[calc(100%+8rem)] w-screen h-1/2 bg-gradient-to-t from-background to-transparent" />
 
       {/* Aesthetic Lines (Top Left) */}
       {/* <div className="absolute top-4 left-4 w-16 h-0.5 bg-white/10 rotate-45 before:block before:absolute before:-left-6 before:top-2 before:w-0.5 before:h-8 before:bg-white/10" /> */}
@@ -280,7 +284,8 @@ const LandingPage: NextPage = () => {
       <Header />
 
       <main className="pt-16">
-        <SectionWrapper className="pt-24 pb-28 sm:pt-32 sm:pb-24 overflow-hidden border-b border-gray-300 dark:border-white/10">
+        {/* --- HERO SECTION --- */}
+        <SectionWrapper className="pt-24 pb-28 sm:pt-32 sm:pb-72 overflow-hidden border-b border-gray-300 dark:border-white/10">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
             {/* 3D Tilt Cards */}
             <div
@@ -289,29 +294,32 @@ const LandingPage: NextPage = () => {
             >
               <div className="relative size-full">
                 <TiltCard
-                  imageLight="/images/context-dark.png"
-                  imageDark="/images/context-light.png"
+                  imageLight="/images/context-light.png"
+                  imageDark="/images/context-dark.png"
                   alt="Context Card"
-                  className="absolute top-0 right-0 w-[350px] rotate-12"
+                  className="absolute top-10 right-14 w-[450px] rotate-12"
                 />
                 <TiltCard
                   imageLight="/images/dock-light.png"
                   imageDark="/images/dock-dark.png"
                   alt="Dock Card"
-                  className="absolute top-0 right-0 w-[350px] rotate-12"
+                  className="absolute -top-40 right-[4.5rem] w-[450px] rotate-12"
                 />
                 <TiltCard
                   imageLight="/images/chat-light.png"
                   imageDark="/images/chat-dark.png"
-                  alt="Context Card"
-                  className="absolute top-[-30rem] right-32 w-[300px] -rotate-12"
+                  alt="Chat Card"
+                  className="absolute top-[-39rem] right-44 w-[320px] -rotate-12"
                 />
                 <TiltCard
                   imageLight="/images/library-light.png"
                   imageDark="/images/library-dark.png"
                   alt="Library Card"
-                  className="absolute top-[-30rem] right-32 w-[300px] -rotate-12"
+                  className="absolute top-[-38.5rem] right-44 w-[320px] -rotate-12"
                 />
+              </div>
+              <div className="absolute flex gap-2 flex-col bottom-[-8.5rem] right-28 bg-white/10 text-white/70 text-xs p-1 rounded-lg">
+                <PointerIcon className="size-5 inline-block" />
               </div>
             </div>
             <div className="relative z-10 text-center lg:text-left max-w-2xl">
@@ -324,13 +332,13 @@ const LandingPage: NextPage = () => {
               </motion.div>
               <motion.h1
                 variants={FADE_IN_ANIMATION_VARIANTS}
-                className="mt-6 text-4xl font-extrabold tracking-tighter sm:text-6xl lg:text-7xl bg-clip-text text-transparent bg-gradient-to-b from-zinc-400 to-zinc-800 dark:from-white dark:to-zinc-400"
+                className="mt-6 text-4xl font-bold tracking-tighter sm:text-6xl lg:text-[4.15rem] bg-clip-text text-transparent bg-gradient-to-b from-zinc-400 to-zinc-800 dark:from-white dark:to-zinc-400"
               >
                 {"Reimagining AI with Bulletproof Context."}
               </motion.h1>
               <motion.p
                 variants={FADE_IN_ANIMATION_VARIANTS}
-                className="mt-6 text-lg text-muted-foreground"
+                className="mt-6 text-base sm:pl-2 max-w-lg font-normal text-muted-foreground"
               >
                 {
                   "Lumachor isn't another wrapper—it's the engine that unlocks 100% of an LLM's power by injecting expert-level context into every conversation, instantly."
@@ -338,10 +346,10 @@ const LandingPage: NextPage = () => {
               </motion.p>
               <motion.div
                 variants={FADE_IN_ANIMATION_VARIANTS}
-                className="mt-8 flex justify-center lg:justify-start"
+                className="mt-8 flex sm:pl-1 justify-center lg:justify-start"
               >
                 <Link
-                  href="/"
+                  href="/login"
                   className="relative inline-flex items-center font-bold justify-center rounded-xl text-sm text-white h-11 px-7 py-2 group overflow-hidden"
                 >
                   {/* Animated Shimmering Gradient Background */}
@@ -392,6 +400,62 @@ const LandingPage: NextPage = () => {
                       className="ml-2"
                     >
                       <ArrowRight className="size-4" />
+                    </motion.div>
+                  </motion.div>
+                </Link>
+
+                {/* Chat Button */}
+                <Link
+                  href="/"
+                  className="ml-4 relative inline-flex items-center font-bold justify-center rounded-xl text-sm text-white h-11 px-7 py-2 group overflow-hidden" // Added ml-4 for spacing
+                >
+                  <motion.div
+                    animate={{
+                      backgroundPosition: ["0% 50%", "150% 50%"],
+                    }}
+                    transition={{
+                      duration: 5,
+                      ease: "linear",
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    }}
+                    className="absolute inset-[-200%] z-0 bg-[linear-gradient(110deg,theme(colors.fuchsia.500),45%,theme(colors.indigo.500),55%,theme(colors.fuchsia.500))] bg-[length:200%_100%]" // Changed indigo/fuchsia to cyan/teal
+                  />
+
+                  {/* Splash Effect on Hover */}
+                  <div className="absolute inset-0 z-10">
+                    <motion.div
+                      className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.25),transparent)]"
+                      initial={{ scale: 0, opacity: 0 }}
+                      whileHover={{ scale: 4, opacity: 1 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 300,
+                        damping: 20,
+                      }}
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <motion.div
+                    className="relative z-20 flex items-center"
+                    whileHover="hover"
+                    initial="initial"
+                  >
+                    <span>Chat</span>
+                    <motion.div
+                      variants={{
+                        initial: { x: 0 },
+                        hover: { x: 5 },
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 12,
+                      }}
+                      className="ml-2"
+                    >
+                      <MessageSquareMoreIcon className="size-4" />
                     </motion.div>
                   </motion.div>
                 </Link>
