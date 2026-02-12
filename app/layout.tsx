@@ -8,7 +8,7 @@ import { SessionProvider } from "next-auth/react";
 
 const siteUrl = "https://lumachor.vercel.app";
 const siteName = "Lumachor";
-const defaultTitle = "Lumachor - Contextualize AI with Bulletproof Context";
+const defaultTitle = "Lumachor ⁂ Contextualize AI with Bulletproof Context";
 const defaultDescription =
   "The world's first Context Engine for AI. Generate, manage, and inject high-quality contexts into any LLM conversation. No prompt engineering required—get studio-quality outputs instantly with OpenAI, Anthropic, and more.";
 const ogImage = `${siteUrl}/images/lumachor-landing.png`;
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/images/lumachor-landing.png",
+    apple: "/lumachor.png",
   },
   alternates: {
     canonical: siteUrl,
