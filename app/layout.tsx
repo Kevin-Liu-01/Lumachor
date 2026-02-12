@@ -6,11 +6,82 @@ import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 
+const siteUrl = "https://lumachor.vercel.app";
+const siteName = "Lumachor";
+const defaultTitle = "Lumachor - Contextualize AI with Bulletproof Context";
+const defaultDescription =
+  "The world's first Context Engine for AI. Generate, manage, and inject high-quality contexts into any LLM conversation. No prompt engineering required—get studio-quality outputs instantly with OpenAI, Anthropic, and more.";
+const ogImage = `${siteUrl}/images/dock-dark.png`;
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://lumachor.vercel.app/"),
-  title: "Lumachor - Contextualize AI with Bulletproof Context",
-  description:
-    "Lumachor is an AI chat application that allows you to create, manage, and share context-rich conversations with AI models. It provides a user-friendly interface for interacting with AI, managing context, and sharing insights.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: defaultTitle,
+    template: `%s | ${siteName}`,
+  },
+  description: defaultDescription,
+  keywords: [
+    "AI context engine",
+    "LLM context management",
+    "AI chatbot",
+    "prompt engineering",
+    "OpenAI context",
+    "Anthropic context",
+    "AI conversation",
+    "context library",
+    "AI productivity",
+    "bulletproof context",
+  ],
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  publisher: siteName,
+  applicationName: siteName,
+  category: "Technology",
+  classification: "AI Software",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteUrl,
+    siteName,
+    title: defaultTitle,
+    description: defaultDescription,
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${siteName} - Context Engine for AI`,
+        type: "image/png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
+    images: [ogImage],
+    creator: "@lumachor",
+    site: "@lumachor",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/images/dock-dark.png",
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
 };
 
 export const viewport = {
@@ -28,6 +99,36 @@ const geistMono = Geist_Mono({
   display: "swap",
   variable: "--font-geist-mono",
 });
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": `${siteUrl}/#webapp`,
+      name: siteName,
+      description: defaultDescription,
+      url: siteUrl,
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Web",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: siteName,
+      url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteUrl}/images/lumachor.svg`,
+      },
+    },
+  ],
+};
 
 const LIGHT_THEME_COLOR = "hsl(0 0% 100%)";
 const DARK_THEME_COLOR = "hsl(240deg 10% 3.92%)";
@@ -65,6 +166,10 @@ export default async function RootLayout({
       className={`${geist.variable} ${geistMono.variable}`}
     >
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: THEME_COLOR_SCRIPT,

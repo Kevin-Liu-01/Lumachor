@@ -1,11 +1,18 @@
 import { cookies } from 'next/headers';
 import { auth } from '../(auth)/auth';
+import type { Metadata } from 'next';
 
 import { AppSidebar } from '@/components/app-sidebar';
 import { SidebarProvider, SidebarInset } from '@/components/ui/sidebar';
 import { TooltipProvider } from '@/components/ui/tooltip';
 
 export const experimental_ppr = true;
+
+export const metadata: Metadata = {
+  title: 'Context Library',
+  description:
+    'Browse and manage your AI contexts. Search, star, and organize bulletproof contexts for OpenAI, Anthropic, and other LLMs.',
+};
 
 export default async function LibraryLayout({
   children,

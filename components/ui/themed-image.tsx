@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 
 const ThemedImage = ({
@@ -12,33 +13,22 @@ const ThemedImage = ({
   React.ComponentProps<typeof Image>,
   "src"
 >) => {
-  // 1. Start with a null theme and a not-mounted state.
-  const [theme, setTheme] = useState<"light" | "dark" | null>(null);
+  const { resolvedTheme } = useTheme();
+  const [src, setSrc] = useState(darkSrc);
 
   useEffect(() => {
-    // 2. This effect runs *only on the client* after the component mounts.
-    const storedTheme = localStorage.getItem("theme");
-
-    // 3. We read the theme from localStorage and update our state.
-    if (storedTheme === "dark") {
-      setTheme("dark");
+    if (resolvedTheme === "light") {
+      setSrc(lightSrc);
     } else {
-      // Default to light if it's "light", null, or any other value.
-      setTheme("light");
+      setSrc(darkSrc);
     }
-  }, []); // The empty array ensures this runs only once on mount.
+  }, [resolvedTheme, lightSrc, darkSrc]);
 
-  // 4. While the theme is null (on server or before useEffect runs),
-  //    we render nothing. This PREVENTS the hydration mismatch.
-  if (theme === null) {
-    return null;
-  }
-
-  // 5. Once the theme is determined, we programmatically choose the correct
-  //    image source and render only ONE Image component.
-  const src = theme === "dark" ? darkSrc : lightSrc;
-
-  return <Image src={src} alt={alt} {...props} />;
+  // Always render with a valid src (defaults to darkSrc)
+  // Fall back to darkSrc if the current image fails to load
+  return (
+    <Image src={src} alt={alt} onError={() => setSrc(darkSrc)} {...props} />
+  );
 };
 
 export default ThemedImage;

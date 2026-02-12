@@ -6,8 +6,54 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import { type SVGProps } from "react";
-import { Library, MessageSquare } from "lucide-react";
+import { Library, MessageSquare, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 import LumachorMark from "../lumachormark";
+
+function ThemeToggle() {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return <div className="size-9" />;
+
+  return (
+    <motion.button
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      className="relative size-9 flex items-center justify-center rounded-xl border border-white/10 bg-white/5 text-muted-foreground transition-colors hover:text-foreground hover:bg-white/10"
+      aria-label="Toggle theme"
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        {resolvedTheme === "dark" ? (
+          <motion.div
+            key="sun"
+            initial={{ rotate: -90, opacity: 0 }}
+            animate={{ rotate: 0, opacity: 1 }}
+            exit={{ rotate: 90, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Sun className="size-4" />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="moon"
+            initial={{ rotate: 90, opacity: 0 }}
+            animate={{ rotate: 0, opacity: 1 }}
+            exit={{ rotate: -90, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <Moon className="size-4" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.button>
+  );
+}
 
 export function Header() {
   const pathname = usePathname();
@@ -46,7 +92,7 @@ export function Header() {
         "fixed top-0 inset-x-0 z-50 transition-all duration-300",
         scrolled
           ? "bg-background/80 py-0.5 backdrop-blur-lg border-b border-white/10"
-          : "bg-transparent py-4"
+          : "bg-transparent py-4",
       )}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -55,10 +101,16 @@ export function Header() {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link href="/" className="flex items-center gap-2">
               <div className="dark:hidden">
-                <LumachorMark variant="white" />
+                <LumachorMark
+                  variant="white"
+                  className="sm:size-10 border-2 rounded-xl"
+                />
               </div>
               <div className="hidden dark:flex">
-                <LumachorMark variant="black" />
+                <LumachorMark
+                  variant="black"
+                  className="sm:size-10 border-2 rounded-xl"
+                />
               </div>
               <span className="text-lg font-bold tracking-wide">LUMACHOR</span>
             </Link>
@@ -76,7 +128,7 @@ export function Header() {
                     "relative rounded-full px-4 py-1.5 text-sm font-medium transition-colors flex items-center gap-2",
                     isActive
                       ? "text-white"
-                      : "text-muted-foreground hover:text-foreground"
+                      : "text-muted-foreground hover:text-foreground",
                   )}
                 >
                   {isActive && (
@@ -106,6 +158,7 @@ export function Header() {
 
           {/* Desktop: CTA Buttons */}
           <div className="hidden md:flex items-center gap-4">
+            <ThemeToggle />
             <Link
               href="/login"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
@@ -220,6 +273,16 @@ export function Header() {
                   </Link>
                 </motion.div>
               ))}
+              <motion.div
+                variants={{
+                  open: { opacity: 1, y: 0 },
+                  closed: { opacity: 0, y: -10 },
+                }}
+                className="flex items-center gap-3 p-3"
+              >
+                <ThemeToggle />
+                <span className="text-lg font-semibold">Theme</span>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}

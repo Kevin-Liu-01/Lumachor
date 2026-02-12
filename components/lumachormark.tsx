@@ -21,17 +21,17 @@ export default function LumachorMark({
           dot: { fill: "#FFFFFF", opacity: 1 },
         }
       : variant === "white"
-      ? {
-          tile: { fill: "#FFFFFF", opacity: 1 },
-          swirl: { fill: "#000000", opacity: 1 },
-          dot: { fill: "#000000", opacity: 1 },
-        }
-      : {
-          // original colorful look
-          tile: { fill: "#6366F1", opacity: 0.1 }, // indigo-500 @ 10%
-          swirl: { fill: "#4F46E5", opacity: 0.84 }, // indigo-600 @ 84%
-          dot: { fill: "#E0E7FF", opacity: 0.65 }, // indigo-100 @ 65%
-        };
+        ? {
+            tile: { fill: "#FFFFFF", opacity: 1 },
+            swirl: { fill: "#000000", opacity: 1 },
+            dot: { fill: "#000000", opacity: 1 },
+          }
+        : {
+            // original colorful look
+            tile: { fill: "#6366F1", opacity: 0.1 }, // indigo-500 @ 10%
+            swirl: { fill: "#4F46E5", opacity: 0.84 }, // indigo-600 @ 84%
+            dot: { fill: "#E0E7FF", opacity: 0.65 }, // indigo-100 @ 65%
+          };
 
   return (
     <svg
