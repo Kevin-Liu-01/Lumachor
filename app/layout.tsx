@@ -5,61 +5,52 @@ import { ThemeProvider } from "@/components/theme-provider";
 
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
-
-const siteUrl = "https://lumachor.vercel.app";
-const siteName = "Lumachor";
-const defaultTitle = "Lumachor ⁂ Contextualize AI with Bulletproof Context";
-const defaultDescription =
-  "The world's first Context Engine for AI. Generate, manage, and inject high-quality contexts into any LLM conversation. No prompt engineering required—get studio-quality outputs instantly with OpenAI, Anthropic, and more.";
-const ogImage = `${siteUrl}/images/lumachor-landing.png`;
+import {
+  SITE_URL,
+  SITE_NAME,
+  DEFAULT_TITLE,
+  DEFAULT_DESCRIPTION,
+  OG_IMAGE,
+  SEO_KEYWORDS,
+  GEO,
+} from "@/lib/seo";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: defaultTitle,
-    template: `%s | ${siteName}`,
+    default: DEFAULT_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
-  description: defaultDescription,
-  keywords: [
-    "AI context engine",
-    "LLM context management",
-    "AI chatbot",
-    "prompt engineering",
-    "OpenAI context",
-    "Anthropic context",
-    "AI conversation",
-    "context library",
-    "AI productivity",
-    "bulletproof context",
-  ],
-  authors: [{ name: siteName, url: siteUrl }],
-  creator: siteName,
-  publisher: siteName,
-  applicationName: siteName,
+  description: DEFAULT_DESCRIPTION,
+  keywords: SEO_KEYWORDS,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  applicationName: SITE_NAME,
   category: "Technology",
   classification: "AI Software",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteUrl,
-    siteName,
-    title: defaultTitle,
-    description: defaultDescription,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
     images: [
       {
-        url: ogImage,
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: `${siteName} - Context Engine for AI`,
+        alt: `${SITE_NAME} - Context Engine for AI`,
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: defaultTitle,
-    description: defaultDescription,
-    images: [ogImage],
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [OG_IMAGE],
     creator: "@lumachor",
     site: "@lumachor",
   },
@@ -77,10 +68,14 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
-    apple: "/lumachor.png",
+    apple: "/apple-icon.png",
   },
   alternates: {
-    canonical: siteUrl,
+    canonical: SITE_URL,
+  },
+  other: {
+    "geo.region": GEO.region,
+    "geo.placename": GEO.placename,
   },
 };
 
@@ -105,10 +100,10 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "WebApplication",
-      "@id": `${siteUrl}/#webapp`,
-      name: siteName,
-      description: defaultDescription,
-      url: siteUrl,
+      "@id": `${SITE_URL}/#webapp`,
+      name: SITE_NAME,
+      description: DEFAULT_DESCRIPTION,
+      url: SITE_URL,
       applicationCategory: "DeveloperApplication",
       operatingSystem: "Web",
       offers: {
@@ -119,12 +114,12 @@ const jsonLd = {
     },
     {
       "@type": "Organization",
-      "@id": `${siteUrl}/#organization`,
-      name: siteName,
-      url: siteUrl,
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      url: SITE_URL,
       logo: {
         "@type": "ImageObject",
-        url: `${siteUrl}/images/lumachor.svg`,
+        url: `${SITE_URL}/images/lumachor.svg`,
       },
     },
   ],

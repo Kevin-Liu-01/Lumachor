@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/seo";
 
-const baseUrl = "https://lumachor.vercel.app";
+const baseUrl = SITE_URL;
 
 export default function robots(): MetadataRoute.Robots {
   return {
