@@ -43,6 +43,10 @@ export async function middleware(request: NextRequest) {
   });
 
   if (!token) {
+    if (pathname === '/') {
+      return NextResponse.redirect(new URL('/home', request.url));
+    }
+
     const redirectUrl = encodeURIComponent(request.url);
     return NextResponse.redirect(
       new URL(`/api/auth/guest?redirectUrl=${redirectUrl}`, request.url),

@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: homeTitle,
   description: homeDescription,
   openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: SITE_NAME,
     title: homeTitle,
     description: homeDescription,
     url: `${SITE_URL}/home`,
@@ -24,6 +27,14 @@ export const metadata: Metadata = {
         type: "image/png",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: homeTitle,
+    description: homeDescription,
+    images: [OG_IMAGE],
+    creator: "@lumachor",
+    site: "@lumachor",
   },
   alternates: {
     canonical: `${SITE_URL}/home`,
