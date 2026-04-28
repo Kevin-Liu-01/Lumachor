@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: 'Search Chats',
   description:
     'Search across your AI conversation history. Find any chat by title or message content.',
+  alternates: {
+    canonical: '/search',
+  },
 };
 
 export default async function SearchLayout({

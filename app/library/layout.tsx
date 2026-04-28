@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: 'Context Library',
   description:
     'Browse and manage your AI contexts. Search, star, and organize bulletproof contexts for OpenAI, Anthropic, and other LLMs.',
+  alternates: {
+    canonical: '/library',
+  },
 };
 
 export default async function LibraryLayout({
